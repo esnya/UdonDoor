@@ -1,6 +1,6 @@
 {
   "name": "com.nekometer.udon-door",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.1",
   "private": true,
   "description": "UdonDoor",
   "keywords": [
@@ -29,7 +29,9 @@
     "semantic-release-gitmoji": "^1.3.4"
   },
   "commitlint": {
-    "extends": ["gitmoji"]
+    "extends": [
+      "gitmoji"
+    ]
   },
   "husky": {
     "hooks": {
@@ -42,8 +44,14 @@
       "master",
       "next",
       "next-major",
-      { "name": "beta", "prerelease": true },
-      { "name": "alpha", "prerelease": true}
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
     ],
     "plugins": [
       "semantic-release-gitmoji",
