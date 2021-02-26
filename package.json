@@ -1,6 +1,6 @@
 {
   "name": "com.nekometer.udon-door",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.0",
   "private": true,
   "description": "UdonDoor",
   "keywords": [
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/esnya/UdonSunController.git"
+    "url": "git+https://github.com/esnya/UdonDoor.git"
   },
   "license": "MIT",
   "author": "esnya",
