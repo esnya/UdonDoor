@@ -41,7 +41,9 @@
   "release": {
     "branches": [
       "master",
-      { "name": "next", "prerelease": true }
+      { "name": "next", "prerelease": true },
+      { "name": "beta", "prerelease": true },
+      { "name": "alpha", "prerelease": true }
     ],
     "plugins": [
       "semantic-release-gitmoji",
