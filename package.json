@@ -1,6 +1,6 @@
 {
   "name": "com.nekometer.udon-door",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha",
   "private": true,
   "description": "UdonDoor",
   "keywords": [
@@ -37,6 +37,14 @@
     }
   },
   "release": {
+    "branches": [
+      "+([0-9])?(.{+([0-9]),x}).x",
+      "master",
+      "next",
+      "next-major",
+      { "name": "beta", "prerelease": true },
+      { "name": "alpha", "prerelease": true}
+    ],
     "plugins": [
       "semantic-release-gitmoji",
       [
