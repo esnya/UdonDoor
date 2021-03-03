@@ -102,14 +102,22 @@ namespace EsnyaFactory.UdonDoor
         [UdonSynced(UdonSyncMode.Smooth)] float doorAngle = 0;
         float doorSpeed = 0;
 
+        Vector3 GetDoorWorldAxis() {
+            return door.TransformDirection(doorLocalAxis);
+        }
+
+        Vector3 GetDoorWorldSecondaryAxis() {
+            return door.TransformDirection(doorLocalSecondaryAxis);
+        }
+
         void Door_Start()
         {
             doorLocalAxis.Normalize();
 
             doorLocalToWorld = door.localToWorldMatrix;
             doorWorldToLocal = door.worldToLocalMatrix;
-            doorWorldAxis = door.TransformDirection(doorLocalAxis);
-            doorWorldSecondaryAxis = door.TransformDirection(doorLocalSecondaryAxis);
+            doorWorldAxis = GetDoorWorldAxis();
+            doorWorldSecondaryAxis = GetDoorWorldSecondaryAxis();
         }
 
         void Door_OwnerUpdate()
@@ -123,9 +131,6 @@ namespace EsnyaFactory.UdonDoor
                 var targetDoorAngle = Vector3.SignedAngle(doorLocalSecondaryAxis, doorToGrabberOnDoorAxisLocalDirection, doorLocalAxis);
 
                 doorSpeed = (targetDoorAngle - doorAngle) * doorSpring;
-            // } else if (prevDoorAngle == doorAngle) {
-            //     doorSpeed = 0;
-            //     isSleeping = true;
             } else  {
                 doorSpeed = doorSpeed * Mathf.Max(1 - doorDrag * Time.deltaTime, 0);
             }
@@ -194,17 +199,21 @@ namespace EsnyaFactory.UdonDoor
 
         #region Editor
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
-/*
+
         void OnDrawGizmos() {
-            if (doorWorldAxis == Vector3.zero) Start();
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(door.position, 0.02f);
 
             Gizmos.color = Color.green;
-            Gizmos.DrawRay(door.position, doorWorldAxis);
+            Gizmos.DrawRay(door.position, GetDoorWorldAxis());
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawRay(door.position, Quaternion.AngleAxis(doorMinAngle, GetDoorWorldAxis()) * GetDoorWorldSecondaryAxis());
+            Gizmos.DrawRay(door.position, Quaternion.AngleAxis(doorMaxAngle, GetDoorWorldAxis()) * GetDoorWorldSecondaryAxis());
 
             Gizmos.color = Color.red;
-            Gizmos.DrawRay(door.position, Quaternion.AngleAxis(doorAngle, doorWorldAxis) * doorWorldSecondaryAxis);
+            Gizmos.DrawRay(door.position, GetDoorWorldSecondaryAxis());
         }
-        */
 #endif
         #endregion
     }
